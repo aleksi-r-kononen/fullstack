@@ -31,11 +31,34 @@ const Persons = ({ persons, filter, handleRemoveName }) => (
   </ul>
 )
 
+const Message = ({ message, color }) => {
+  if (message === null)
+    return null
+
+  const style = {
+    color: color,
+    background: 'lightgrey',
+    fontSize: 20,
+    borderStyle: 'solid',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 10
+  }
+
+  return (
+    <p style={style}>
+      {message}
+    </p>
+  )
+}
+
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [successMessage, setSuccessMessage] = useState(null)
 
   useEffect(() => {
     console.log('Using effect')
@@ -66,6 +89,20 @@ const App = () => {
           setPersons(persons.map(p => p.id === existingPerson.id ? response : p))
           setNewName('')
           setNewNumber('')
+          setSuccessMessage(
+            `Updated ${response.name}`
+          )
+          setTimeout(() => {
+            setSuccessMessage(null)
+          }, 5000)
+        })
+        .catch(error => {
+          setErrorMessage(
+            `Information of ${existingPerson.name} has already been removed from server`
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
         })
 
       return
@@ -77,6 +114,12 @@ const App = () => {
         setPersons(persons.concat(data))
         setNewName('')
         setNewNumber('')
+        setSuccessMessage(
+          `Added ${data.name}`
+        )
+        setTimeout(() => {
+          setSuccessMessage(null)
+        }, 5000)
       })
   }
 
@@ -97,14 +140,23 @@ const App = () => {
     console.log("Removing", person.name)
     nameService
       .remove(person.id)
-      .then(response =>
+      .then(response => {
         setPersons(persons.filter(p => p.id !== person.id))
-      )
+        setSuccessMessage(
+          `Removed ${response.name}`
+        )
+        setTimeout(() => {
+          setSuccessMessage(null)
+        }, 5000)
+      })
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
+
+      <Message message={successMessage} color={'green'} />
+      <Message message={errorMessage} color={'red'} />
 
       <Filter value={newFilter} onChange={handleFilterChange} />
 
