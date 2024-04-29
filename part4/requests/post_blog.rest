@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "Fancy Blog 2",
-    "author": "Lady Ladan't",
-    "url": "turtleducksareverycool.org",
-    "likes": 1
+    "title": "Fancy Blog 3",
+    "author": "Lady Ladan'tn't",
+    "url": "turtleducksareincrediblycool.org",
+    "likes": 0
 }
