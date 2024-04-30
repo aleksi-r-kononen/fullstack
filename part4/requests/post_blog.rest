@@ -1,9 +1,10 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImktbGlrZS10dXJ0bGVkdWNrcyIsImlkIjoiNjYzMGI2YjQ3NjhmY2I3MDI0NjU5ZmE5IiwiaWF0IjoxNzE0NDczMTIyLCJleHAiOjE3MTQ0NzY3MjJ9.jw2vR2gGDjDp8JIlZmMe1h28wewiLFOCwSVC3Fb2nHc
 
 {
-    "title": "Fancy Blog 3",
-    "author": "Lady Ladan'tn't",
-    "url": "turtleducksareincrediblycool.org",
-    "likes": 0
+    "title": "testblog3",
+    "author": "Lady Lada",
+    "url": "aweburl.org",
+    "likes": 7
 }
